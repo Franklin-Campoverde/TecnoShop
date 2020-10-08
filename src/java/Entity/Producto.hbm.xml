@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 07-oct-2020 0:02:51 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Entity.Producto" table="PRODUCTO" schema="APLICACIONWEB" optimistic-lock="version">
+        <id name="idProducto" type="big_decimal">
+            <column name="ID_PRODUCTO" precision="22" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="marca" class="Entity.Marca" fetch="select">
+            <column name="MARCA" precision="22" scale="0" />
+        </many-to-one>
+        <many-to-one name="imagen" class="Entity.Imagen" fetch="select">
+            <column name="URL_IMAGEN" precision="22" scale="0" />
+        </many-to-one>
+        <property name="nomber" type="string">
+            <column name="NOMBER" length="25" />
+        </property>
+        <property name="descripcion" type="string">
+            <column name="DESCRIPCION" length="200" />
+        </property>
+        <property name="codigoUnico" type="string">
+            <column name="CODIGO_UNICO" length="25" />
+        </property>
+        <property name="precio" type="big_decimal">
+            <column name="PRECIO" precision="22" scale="0" />
+        </property>
+        <property name="modelo" type="string">
+            <column name="MODELO" length="25" />
+        </property>
+        <set name="detalleProductos" table="DETALLE_PRODUCTO" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="PRODUCTO" precision="22" scale="0" />
+            </key>
+            <one-to-many class="Entity.DetalleProducto" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 07-oct-2020 0:02:51 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Entity.Usuarios" table="USUARIOS" schema="APLICACIONWEB" optimistic-lock="version">
+        <id name="idUsuario" type="big_decimal">
+            <column name="ID_USUARIO" precision="22" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <property name="nombreUsuario" type="string">
+            <column name="NOMBRE_USUARIO" length="25" />
+        </property>
+        <property name="contrasena" type="string">
+            <column name="CONTRASENA" length="25" />
+        </property>
+        <property name="correo" type="string">
+            <column name="CORREO" length="25" />
+        </property>
+        <property name="tipoUsuario" type="java.lang.Character">
+            <column name="TIPO_USUARIO" length="1" />
+        </property>
+        <set name="clientes" table="CLIENTE" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="USUARIO" precision="22" scale="0" />
+            </key>
+            <one-to-many class="Entity.Cliente" />
+        </set>
+    </class>
+</hibernate-mapping>
